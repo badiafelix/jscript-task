@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Aplikasi Misi</title>
+    </head>
+    <body>
+        <input id="nama-misi" type="text"/>
+        <input id= "date-picker" type="date"/>
+        <button onclick="tambahMisi()">Tambah Misi</button>
+
+        <div id="misi-list"></div>
+
+        <script>
+            const misi = [{
+                    title: 'Berbelanja',
+                    dueDate: '2021-10-04',
+                    id: 'id1'
+                },
+                {
+                    title: 'Cuci Mobil',
+                    dueDate: '2021-10-04',
+                    id: 'id2'
+                },
+                {
+                    title: 'Masak',
+                    dueDate: '2021-10-04',
+                    id: 'id3'
+                }];
+                
+            render();
+
+            function tambahMisi(){
+                const textbox = document.getElementById('nama-misi');
+                const nama = textbox.value;
+
+                const datePicker = document.getElementById('date-picker');
+                const dueDate = datePicker.value;
+
+                const id = new Date().getTime()
+                misi.push({
+                    title: nama,
+                    dueDate: dueDate,
+                    id: id
+                });
+                render();
+            }
+
+            function deleteTodo(){
+                console.log('bajigur');
+            }
+            function render(){
+                document.getElementById('misi-list').innerHTML='';
+                misi.forEach(function(misiparam){
+                    const element = document.createElement('div');
+                    element.innerText = misiparam.title + ' ' + misiparam.dueDate;
+
+                    const deletebutton = document.createElement('button');
+                    deletebutton.innerText='Delete';
+                    deletebutton.style='margin-left: 12px;'
+                    deletebutton.onclick = deleteTodo;
+                    deletebutton.id = misiparam.id
+                    element.appendChild(deletebutton);
+
+                    const misiList = document.getElementById('misi-list');
+                    misiList.appendChild(element);
+            });
+            }
+            
+        </script>
+    </body>
+</html>
